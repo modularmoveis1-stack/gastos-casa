@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Nosso Caderno de Contas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;
+    --paper-2:#EFE7D6;
+    --ink:#2B241C;
+    --ink-soft:#7A6F5C;
+    --line:#DCD0B8;
+    --verde:#3F6355;
+    --verde-soft:#E5ECE6;
+    --terra:#AD5236;
+    --terra-soft:#F2E3DC;
+    --amarelo:#C1841F;
+    --alerta:#B23B2E;
+    --branco:#FFFDF8;
+    --shadow: 0 2px 10px rgba(43,36,28,0.08);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image: repeating-linear-gradient(var(--paper) 0px, var(--paper) 37px, var(--line) 38px);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:520px; margin:0 auto; padding:0 0 100px 0;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:28px 20px 18px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  h1 em{font-style:italic; font-weight:500; color:var(--verde);}
+
+  /* ---------- MONTH NAV ---------- */
+  .month-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin:18px 20px 0;
+  }
+  .month-nav button{
+    background:var(--branco);
+    border:1px solid var(--line);
+    width:38px; height:38px;
+    border-radius:50%;
+    font-family:'Space Mono',monospace;
+    font-size:16px;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow);
+    transition: transform .12s ease;
+  }
+  .month-nav button:active{transform:scale(0.92);}
+  .month-label{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:19px;
+    min-width:150px;
+    text-align:center;
+    text-transform:capitalize;
+  }
+
+  /* ---------- STAMP TOTAL ---------- */
+  .stamp-area{
+    display:flex; justify-content:center;
+    padding:22px 20px 8px;
+  }
+  .stamp{
+    position:relative;
+    background:var(--branco);
+    border:2px solid var(--ink);
+    border-radius:14px;
+    padding:22px 30px;
+    text-align:center;
+    box-shadow: var(--shadow);
+    transform: rotate(-1deg);
+  }
+  .stamp .lbl{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .stamp .valor{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:40px;
+    color:var(--ink);
+    margin-top:2px;
+    white-space:nowrap;
+  }
+  .stamp .valor sup{font-size:18px; font-weight:600;}
+  .stamp .selo{
+    position:absolute;
+    top:-12px; right:-12px;
+    background:var(--verde);
+    color:var(--branco);
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    letter-spacing:.06em;
+    border-radius:50%;
+    width:52px; height:52px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    line-height:1.15;
+    transform: rotate(8deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.18);
+  }
+
+  /* ---------- BREAKDOWN ---------- */
+  .breakdown{
+    display:flex;
+    gap:10px;
+    padding:16px 20px 4px;
+  }
+  .chip{
+    flex:1;
+    background:var(--branco);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    box-shadow:var(--shadow);
+  }
+  .chip .who{
+    font-size:12px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:3px;
+  }
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
+  .dot.you{background:var(--verde);}
+  .dot.spouse{background:var(--terra);}
+  .chip .amt{
+    font-family:'Space Mono',monospace;
+    font-size:15px;
+    font-weight:700;
+  }
+
+  /* ---------- ADD BUTTON ---------- */
+  .fab{
+    position:fixed;
+    right:20px; bottom:20px;
+    background:var(--ink);
+    color:var(--branco);
+    border:none;
+    width:58px; height:58px;
+    border-radius:50%;
+    font-size:28px;
+    box-shadow:0 6px 16px rgba(43,36,28,.35);
+    cursor:pointer;
+    z-index:20;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform .15s ease;
+  }
+  .fab:active{transform:scale(0.9);}
+
+  /* ---------- LIST ---------- */
+  .list-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:26px 20px 8px;
+  }
+  .list-header h2{
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    font-weight:600;
+    margin:0;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .list-header span{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .list{padding:0 14px;}
+  .empty{
+    text-align:center;
+    padding:50px 30px;
+    color:var(--ink-soft);
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:15px;
+  }
+  .row{
+    background:var(--branco);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:13px 14px;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    box-shadow:var(--shadow);
+  }
+  .row .who-dot{flex-shrink:0;}
+  .row .info{flex:1; min-width:0;}
+  .row .desc{
+    font-weight:600;
+    font-size:14.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .row .meta{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .row .foto-tag{color:var(--verde);}
+  .row .valor{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:15px;
+    white-space:nowrap;
+  }
+
+  /* ---------- MODAL ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(43,36,28,.45);
+    z-index:30;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .overlay.open{display:flex;}
+  .sheet{
+    background:var(--paper);
+    width:100%; max-width:520px;
+    border-radius:20px 20px 0 0;
+    padding:22px 20px 26px;
+    box-shadow: 0 -8px 24px rgba(0,0,0,.2);
+    max-height:88vh;
+    overflow-y:auto;
+    animation: slideup .22s ease;
+  }
+  @keyframes slideup{from{transform:translateY(24px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  .sheet h3{
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    margin:0 0 16px;
+  }
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin-bottom:6px;
+  }
+  .field input, .field select{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--branco);
+    border-radius:9px;
+    padding:12px 12px;
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--verde); outline-offset:1px;}
+  .valor-input{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:22px !important;
+  }
+  .toggle-group{display:flex; gap:8px;}
+  .toggle-group button{
+    flex:1;
+    padding:12px 8px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--branco);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .toggle-group button.active.you{background:var(--verde-soft); border-color:var(--verde); color:var(--verde);}
+  .toggle-group button.active.spouse{background:var(--terra-soft); border-color:var(--terra); color:var(--terra);}
+  .foto-btn{
+    display:flex; align-items:center; gap:10px;
+    background:var(--branco);
+    border:1px dashed var(--ink-soft);
+    border-radius:9px;
+    padding:12px;
+    cursor:pointer;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .foto-preview{
+    margin-top:8px;
+    max-width:100%;
+    border-radius:8px;
+    display:none;
+  }
+  .actions{display:flex; gap:10px; margin-top:18px;}
+  .btn{
+    flex:1;
+    padding:14px;
+    border-radius:10px;
+    border:none;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .btn.primary{background:var(--ink); color:var(--branco);}
+  .btn.danger{background:var(--terra-soft); color:var(--alerta);}
+  .btn.ghost{background:transparent; color:var(--ink-soft); border:1px solid var(--line);}
+  .close-x{
+    position:absolute; top:14px; right:16px;
+    background:none; border:none;
+    font-size:20px; color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .sync-note{
+    text-align:center;
+    font-size:11px;
+    color:var(--ink-soft);
+    font-family:'Space Mono',monospace;
+    padding:14px 30px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Casa · Contas do mês</div>
+    <h1>Nosso Caderno de <em>Contas</em></h1>
+  </header>
+
+  <div class="month-nav">
+    <button onclick="mudarMes(-1)">&#8592;</button>
+    <div class="month-label" id="monthLabel">—</div>
+    <button onclick="mudarMes(1)">&#8594;</button>
+  </div>
+
+  <div class="stamp-area">
+    <div class="stamp">
+      <div class="lbl">Total gasto</div>
+      <div class="valor" id="totalMes"><sup>R$</sup>0,00</div>
+      <div class="selo">SOMA<br>AUTO</div>
+    </div>
+  </div>
+
+  <div class="breakdown">
+    <div class="chip">
+      <div class="who"><span class="dot you"></span> Você</div>
+      <div class="amt" id="totalVoce">R$ 0,00</div>
+    </div>
+    <div class="chip">
+      <div class="who"><span class="dot spouse"></span> Marido</div>
+      <div class="amt" id="totalMarido">R$ 0,00</div>
+    </div>
+  </div>
+
+  <div class="list-header">
+    <h2>Lançamentos</h2>
+    <span id="qtdLancamentos">0 itens</span>
+  </div>
+  <div class="list" id="lista"></div>
+
+  <div class="sync-note" id="syncNote"></div>
+</div>
+
+<button class="fab" onclick="abrirModal()">+</button>
+
+<!-- MODAL LANÇAR / EDITAR -->
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <button class="close-x" onclick="fecharModal()">&times;</button>
+    <h3 id="modalTitulo">Novo gasto</h3>
+
+    <div class="field">
+      <label>Valor</label>
+      <input type="number" inputmode="decimal" step="0.01" placeholder="0,00" id="fValor" class="valor-input">
+    </div>
+
+    <div class="field">
+      <label>Do que se trata</label>
+      <input type="text" placeholder="Ex: Mercado, Farmácia, Gasolina..." id="fDescricao">
+    </div>
+
+    <div class="field">
+      <label>Quem gastou</label>
+      <div class="toggle-group">
+        <button type="button" class="you" id="btnVoce" onclick="setQuem('Você')">Você</button>
+        <button type="button" class="spouse" id="btnMarido" onclick="setQuem('Marido')">Marido</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Data</label>
+      <input type="date" id="fData">
+    </div>
+
+    <div class="field">
+      <label>Comprovante (opcional)</label>
+      <label class="foto-btn">
+        📎 <span id="fotoLabel">Anexar foto da nota</span>
+        <input type="file" accept="image/*" capture="environment" id="fFoto" style="display:none" onchange="onFoto(event)">
+      </label>
+      <img id="fotoPreview" class="foto-preview">
+    </div>
+
+    <div class="actions">
+      <button class="btn ghost" id="btnExcluir" style="display:none" onclick="excluirAtual()">Excluir</button>
+      <button class="btn primary" onclick="salvarGasto()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO
+   Cole aqui a URL do seu Apps Script (Web App) quando publicar.
+   Deixe em branco '' para usar só o navegador (localStorage),
+   ideal pra testar antes de conectar a planilha.
+========================================================= */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWXswUEo5vjq7hK4NbZWcV2p6B2QIZNXjpcbrC2t9E0_MBelH8oaPXpzYq8SOux5na3A/exec';
+
+const STORAGE_KEY = 'gastos_casa_v1';
+let gastos = [];
+let mesAtual = new Date().toISOString().slice(0,7); // YYYY-MM
+let quemSelecionado = 'Você';
+let fotoBase64 = null;
+let editandoId = null;
+
+const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function fmt(v){
+  return 'R$ ' + Number(v||0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+/* ---------- CARREGAR / SALVAR ---------- */
+function carregarLocal(){
+  try{ gastos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch(e){ gastos = []; }
+}
+function salvarLocal(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(gastos));
+}
+
+async function carregarDaPlanilha(){
+  if(!APPS_SCRIPT_URL){
+    document.getElementById('syncNote').textContent = 'Salvando só neste aparelho (planilha não conectada)';
+    return;
+  }
+  try{
+    const res = await fetch(APPS_SCRIPT_URL);
+    const data = await res.json();
+    gastos = (data.gastos || []).map(g => ({
+      id: String(g.ID || g.id),
+      data: g.Data || g.data,
+      descricao: g.Descricao || g.descricao,
+      valor: Number(g.Valor || g.valor),
+      quem: g.Quem || g.quem,
+      comprovante: g.Comprovante || g.comprovante || ''
+    }));
+    salvarLocal();
+    document.getElementById('syncNote').textContent = 'Sincronizado com a planilha ✓';
+  }catch(err){
+    document.getElementById('syncNote').textContent = 'Sem conexão com a planilha — mostrando dados salvos neste aparelho';
+  }
+  renderTudo();
+}
+
+async function enviarParaPlanilha(payload){
+  if(!APPS_SCRIPT_URL) return;
+  try{
+    await fetch(APPS_SCRIPT_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload)
+    });
+    await carregarDaPlanilha();
+  }catch(err){
+    console.warn('Falha ao sincronizar com a planilha', err);
+  }
+}
+
+/* ---------- NAVEGAÇÃO DE MÊS ---------- */
+function mudarMes(delta){
+  const [y,m] = mesAtual.split('-').map(Number);
+  const d = new Date(y, m-1+delta, 1);
+  mesAtual = d.toISOString().slice(0,7);
+  renderTudo();
+}
+
+/* ---------- RENDER ---------- */
+function renderTudo(){
+  const [y,m] = mesAtual.split('-').map(Number);
+  document.getElementById('monthLabel').textContent = meses[m-1] + ' / ' + y;
+
+  const doMes = gastos.filter(g => g.data && g.data.slice(0,7) === mesAtual)
+                       .sort((a,b) => b.data.localeCompare(a.data));
+
+  const total = doMes.reduce((s,g) => s + Number(g.valor||0), 0);
+  const totalVoce = doMes.filter(g=>g.quem==='Você').reduce((s,g)=>s+Number(g.valor||0),0);
+  const totalMarido = doMes.filter(g=>g.quem==='Marido').reduce((s,g)=>s+Number(g.valor||0),0);
+
+  document.getElementById('totalMes').innerHTML = '<sup>R$</sup>' + total.toLocaleString('pt-BR',{minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('totalVoce').textContent = fmt(totalVoce);
+  document.getElementById('totalMarido').textContent = fmt(totalMarido);
+  document.getElementById('qtdLancamentos').textContent = doMes.length + (doMes.length===1?' item':' itens');
+
+  const lista = document.getElementById('lista');
+  if(doMes.length === 0){
+    lista.innerHTML = '<div class="empty">Nada lançado neste mês ainda.<br>Toque no + para adicionar.</div>';
+    return;
+  }
+  lista.innerHTML = doMes.map(g => `
+    <div class="row" onclick="abrirModal('${g.id}')">
+      <span class="who-dot"><span class="dot ${g.quem==='Você'?'you':'spouse'}"></span></span>
+      <div class="info">
+        <div class="desc">${escapeHtml(g.descricao)}</div>
+        <div class="meta">${dataCurta(g.data)} · ${g.quem}${g.comprovante ? ' · <span class="foto-tag">📎 nota anexada</span>' : ''}</div>
+      </div>
+      <div class="valor">${fmt(g.valor)}</div>
+    </div>
+  `).join('');
+}
+
+function dataCurta(iso){
+  const [y,m,d] = iso.split('-');
+  return d + '/' + m;
+}
+function escapeHtml(s){
+  return String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+
+/* ---------- MODAL ---------- */
+function abrirModal(id){
+  editandoId = id || null;
+  fotoBase64 = null;
+  document.getElementById('fotoPreview').style.display = 'none';
+  document.getElementById('fotoLabel').textContent = 'Anexar foto da nota';
+
+  if(id){
+    const g = gastos.find(x => x.id === id);
+    document.getElementById('modalTitulo').textContent = 'Editar gasto';
+    document.getElementById('fValor').value = g.valor;
+    document.getElementById('fDescricao').value = g.descricao;
+    document.getElementById('fData').value = g.data;
+    setQuem(g.quem);
+    document.getElementById('btnExcluir').style.display = 'block';
+    if(g.comprovante){
+      document.getElementById('fotoPreview').src = g.comprovante;
+      document.getElementById('fotoPreview').style.display = 'block';
+      document.getElementById('fotoLabel').textContent = 'Trocar foto';
+    }
+  } else {
+    document.getElementById('modalTitulo').textContent = 'Novo gasto';
+    document.getElementById('fValor').value = '';
+    document.getElementById('fDescricao').value = '';
+    document.getElementById('fData').value = new Date().toISOString().slice(0,10);
+    setQuem('Você');
+    document.getElementById('btnExcluir').style.display = 'none';
+  }
+  document.getElementById('overlay').classList.add('open');
+}
+function fecharModal(){
+  document.getElementById('overlay').classList.remove('open');
+}
+function setQuem(q){
+  quemSelecionado = q;
+  document.getElementById('btnVoce').classList.toggle('active', q==='Você');
+  document.getElementById('btnMarido').classList.toggle('active', q==='Marido');
+}
+function onFoto(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    fotoBase64 = reader.result;
+    document.getElementById('fotoPreview').src = fotoBase64;
+    document.getElementById('fotoPreview').style.display = 'block';
+    document.getElementById('fotoLabel').textContent = 'Foto anexada ✓';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------- SALVAR / EXCLUIR ---------- */
+async function salvarGasto(){
+  const valor = parseFloat(document.getElementById('fValor').value);
+  const descricao = document.getElementById('fDescricao').value.trim();
+  const data = document.getElementById('fData').value;
+
+  if(!valor || valor <= 0){ alert('Digite um valor válido.'); return; }
+  if(!descricao){ alert('Descreva do que se trata o gasto.'); return; }
+  if(!data){ alert('Escolha a data.'); return; }
+
+  if(editandoId){
+    const g = gastos.find(x => x.id === editandoId);
+    g.valor = valor; g.descricao = descricao; g.data = data; g.quem = quemSelecionado;
+    if(fotoBase64) g.comprovante = fotoBase64;
+    salvarLocal();
+    await enviarParaPlanilha({action:'edit', id:editandoId, valor, descricao, data, quem:quemSelecionado, foto: fotoBase64});
+  } else {
+    const novo = {
+      id: Date.now().toString(),
+      valor, descricao, data, quem: quemSelecionado,
+      comprovante: fotoBase64 || ''
+    };
+    gastos.push(novo);
+    salvarLocal();
+    await enviarParaPlanilha({action:'add', ...novo, foto: fotoBase64, fotoNome: descricao + '.jpg'});
+  }
+  fecharModal();
+  renderTudo();
+}
+
+async function excluirAtual(){
+  if(!editandoId) return;
+  if(!confirm('Excluir este lançamento?')) return;
+  gastos = gastos.filter(x => x.id !== editandoId);
+  salvarLocal();
+  await enviarParaPlanilha({action:'delete', id: editandoId});
+  fecharModal();
+  renderTudo();
+}
+
+/* ---------- INIT ---------- */
+carregarLocal();
+renderTudo();
+carregarDaPlanilha();
+</script>
+</body>
+</html>
