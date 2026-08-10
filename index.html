@@ -42,7 +42,7 @@
   }
   .eyebrow{
     font-family:'Space Mono',monospace;
-    font-size:11px;
+    font-size:12px;
     letter-spacing:.12em;
     text-transform:uppercase;
     color:var(--ink-soft);
@@ -51,7 +51,7 @@
   h1{
     font-family:'Fraunces',serif;
     font-weight:600;
-    font-size:26px;
+    font-size:30px;
     margin:0;
     letter-spacing:-0.01em;
   }
@@ -68,10 +68,10 @@
   .month-nav button{
     background:var(--branco);
     border:1px solid var(--line);
-    width:38px; height:38px;
+    width:46px; height:46px;
     border-radius:50%;
     font-family:'Space Mono',monospace;
-    font-size:16px;
+    font-size:19px;
     color:var(--ink);
     cursor:pointer;
     display:flex; align-items:center; justify-content:center;
@@ -82,7 +82,7 @@
   .month-label{
     font-family:'Fraunces',serif;
     font-weight:600;
-    font-size:19px;
+    font-size:23px;
     min-width:150px;
     text-align:center;
     text-transform:capitalize;
@@ -105,7 +105,7 @@
   }
   .stamp .lbl{
     font-family:'Space Mono',monospace;
-    font-size:11px;
+    font-size:13px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--ink-soft);
@@ -113,12 +113,12 @@
   .stamp .valor{
     font-family:'Fraunces',serif;
     font-weight:700;
-    font-size:40px;
+    font-size:50px;
     color:var(--ink);
     margin-top:2px;
     white-space:nowrap;
   }
-  .stamp .valor sup{font-size:18px; font-weight:600;}
+  .stamp .valor sup{font-size:22px; font-weight:600;}
   .stamp .selo{
     position:absolute;
     top:-12px; right:-12px;
@@ -151,7 +151,7 @@
     box-shadow:var(--shadow);
   }
   .chip .who{
-    font-size:12px;
+    font-size:14px;
     font-weight:600;
     display:flex;
     align-items:center;
@@ -163,20 +163,20 @@
   .dot.spouse{background:var(--terra);}
   .chip .amt{
     font-family:'Space Mono',monospace;
-    font-size:15px;
+    font-size:19px;
     font-weight:700;
   }
 
   /* ---------- ADD BUTTON ---------- */
   .fab{
     position:fixed;
-    right:20px; bottom:20px;
+    right:20px; bottom:24px;
     background:var(--ink);
     color:var(--branco);
     border:none;
-    width:58px; height:58px;
+    width:66px; height:66px;
     border-radius:50%;
-    font-size:28px;
+    font-size:34px;
     box-shadow:0 6px 16px rgba(43,36,28,.35);
     cursor:pointer;
     z-index:20;
@@ -194,7 +194,7 @@
   }
   .list-header h2{
     font-family:'Fraunces',serif;
-    font-size:15px;
+    font-size:16px;
     font-weight:600;
     margin:0;
     color:var(--ink-soft);
@@ -203,7 +203,7 @@
   }
   .list-header span{
     font-family:'Space Mono',monospace;
-    font-size:12px;
+    font-size:13px;
     color:var(--ink-soft);
   }
   .list{padding:0 14px;}
@@ -213,7 +213,7 @@
     color:var(--ink-soft);
     font-family:'Fraunces',serif;
     font-style:italic;
-    font-size:15px;
+    font-size:17px;
   }
   .row{
     background:var(--branco);
@@ -230,14 +230,14 @@
   .row .info{flex:1; min-width:0;}
   .row .desc{
     font-weight:600;
-    font-size:14.5px;
+    font-size:17px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
   }
   .row .meta{
     font-family:'Space Mono',monospace;
-    font-size:11px;
+    font-size:13px;
     color:var(--ink-soft);
     margin-top:2px;
   }
@@ -245,7 +245,7 @@
   .row .valor{
     font-family:'Space Mono',monospace;
     font-weight:700;
-    font-size:15px;
+    font-size:18px;
     white-space:nowrap;
   }
 
@@ -255,30 +255,33 @@
     background:rgba(43,36,28,.45);
     z-index:30;
     display:none;
-    align-items:flex-end;
+    align-items:center;
     justify-content:center;
+    padding:16px;
+    overflow-y:auto;
   }
   .overlay.open{display:flex;}
   .sheet{
     background:var(--paper);
-    width:100%; max-width:520px;
-    border-radius:20px 20px 0 0;
-    padding:22px 20px 26px;
-    box-shadow: 0 -8px 24px rgba(0,0,0,.2);
-    max-height:88vh;
+    width:100%; max-width:480px;
+    border-radius:20px;
+    padding:24px 20px 26px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    max-height:calc(100vh - 48px);
     overflow-y:auto;
-    animation: slideup .22s ease;
+    animation: popup .18s ease;
+    margin:auto;
   }
-  @keyframes slideup{from{transform:translateY(24px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  @keyframes popup{from{transform:scale(.96); opacity:0;} to{transform:scale(1); opacity:1;}}
   .sheet h3{
     font-family:'Fraunces',serif;
-    font-size:20px;
+    font-size:24px;
     margin:0 0 16px;
   }
   .field{margin-bottom:14px;}
   .field label{
     display:block;
-    font-size:12px;
+    font-size:13px;
     font-weight:600;
     color:var(--ink-soft);
     text-transform:uppercase;
@@ -290,26 +293,26 @@
     border:1px solid var(--line);
     background:var(--branco);
     border-radius:9px;
-    padding:12px 12px;
+    padding:14px 14px;
     font-family:'Inter',sans-serif;
-    font-size:15px;
+    font-size:17px;
     color:var(--ink);
   }
   .field input:focus, .field select:focus{outline:2px solid var(--verde); outline-offset:1px;}
   .valor-input{
     font-family:'Space Mono',monospace;
     font-weight:700;
-    font-size:22px !important;
+    font-size:26px !important;
   }
   .toggle-group{display:flex; gap:8px;}
   .toggle-group button{
     flex:1;
-    padding:12px 8px;
+    padding:14px 8px;
     border-radius:9px;
     border:1px solid var(--line);
     background:var(--branco);
     font-weight:600;
-    font-size:14px;
+    font-size:16px;
     cursor:pointer;
     color:var(--ink-soft);
   }
@@ -320,9 +323,9 @@
     background:var(--branco);
     border:1px dashed var(--ink-soft);
     border-radius:9px;
-    padding:12px;
+    padding:14px;
     cursor:pointer;
-    font-size:14px;
+    font-size:16px;
     color:var(--ink-soft);
   }
   .foto-preview{
@@ -334,11 +337,11 @@
   .actions{display:flex; gap:10px; margin-top:18px;}
   .btn{
     flex:1;
-    padding:14px;
+    padding:16px;
     border-radius:10px;
     border:none;
     font-weight:700;
-    font-size:15px;
+    font-size:17px;
     cursor:pointer;
     font-family:'Inter',sans-serif;
   }
@@ -348,12 +351,12 @@
   .close-x{
     position:absolute; top:14px; right:16px;
     background:none; border:none;
-    font-size:20px; color:var(--ink-soft);
+    font-size:26px; color:var(--ink-soft);
     cursor:pointer;
   }
   .sync-note{
     text-align:center;
-    font-size:11px;
+    font-size:12px;
     color:var(--ink-soft);
     font-family:'Space Mono',monospace;
     padding:14px 30px 0;
@@ -384,12 +387,12 @@
 
   <div class="breakdown">
     <div class="chip">
-      <div class="who"><span class="dot you"></span> Você</div>
+      <div class="who"><span class="dot you"></span> Anne</div>
       <div class="amt" id="totalVoce">R$ 0,00</div>
     </div>
     <div class="chip">
-      <div class="who"><span class="dot spouse"></span> Marido</div>
-      <div class="amt" id="totalMarido">R$ 0,00</div>
+      <div class="who"><span class="dot spouse"></span> Jessé</div>
+      <div class="amt" id="totalJessé">R$ 0,00</div>
     </div>
   </div>
 
@@ -423,8 +426,8 @@
     <div class="field">
       <label>Quem gastou</label>
       <div class="toggle-group">
-        <button type="button" class="you" id="btnVoce" onclick="setQuem('Você')">Você</button>
-        <button type="button" class="spouse" id="btnMarido" onclick="setQuem('Marido')">Marido</button>
+        <button type="button" class="you" id="btnVoce" onclick="setQuem('Anne')">Anne</button>
+        <button type="button" class="spouse" id="btnJessé" onclick="setQuem('Jessé')">Jessé</button>
       </div>
     </div>
 
@@ -461,7 +464,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWXswUEo5vjq7h
 const STORAGE_KEY = 'gastos_casa_v1';
 let gastos = [];
 let mesAtual = new Date().toISOString().slice(0,7); // YYYY-MM
-let quemSelecionado = 'Você';
+let quemSelecionado = 'Anne';
 let fotoBase64 = null;
 let editandoId = null;
 
@@ -535,12 +538,12 @@ function renderTudo(){
                        .sort((a,b) => b.data.localeCompare(a.data));
 
   const total = doMes.reduce((s,g) => s + Number(g.valor||0), 0);
-  const totalVoce = doMes.filter(g=>g.quem==='Você').reduce((s,g)=>s+Number(g.valor||0),0);
-  const totalMarido = doMes.filter(g=>g.quem==='Marido').reduce((s,g)=>s+Number(g.valor||0),0);
+  const totalVoce = doMes.filter(g=>g.quem==='Anne').reduce((s,g)=>s+Number(g.valor||0),0);
+  const totalJessé = doMes.filter(g=>g.quem==='Jessé').reduce((s,g)=>s+Number(g.valor||0),0);
 
   document.getElementById('totalMes').innerHTML = '<sup>R$</sup>' + total.toLocaleString('pt-BR',{minimumFractionDigits:2, maximumFractionDigits:2});
   document.getElementById('totalVoce').textContent = fmt(totalVoce);
-  document.getElementById('totalMarido').textContent = fmt(totalMarido);
+  document.getElementById('totalJessé').textContent = fmt(totalJessé);
   document.getElementById('qtdLancamentos').textContent = doMes.length + (doMes.length===1?' item':' itens');
 
   const lista = document.getElementById('lista');
@@ -550,7 +553,7 @@ function renderTudo(){
   }
   lista.innerHTML = doMes.map(g => `
     <div class="row" onclick="abrirModal('${g.id}')">
-      <span class="who-dot"><span class="dot ${g.quem==='Você'?'you':'spouse'}"></span></span>
+      <span class="who-dot"><span class="dot ${g.quem==='Anne'?'you':'spouse'}"></span></span>
       <div class="info">
         <div class="desc">${escapeHtml(g.descricao)}</div>
         <div class="meta">${dataCurta(g.data)} · ${g.quem}${g.comprovante ? ' · <span class="foto-tag">📎 nota anexada</span>' : ''}</div>
@@ -593,7 +596,7 @@ function abrirModal(id){
     document.getElementById('fValor').value = '';
     document.getElementById('fDescricao').value = '';
     document.getElementById('fData').value = new Date().toISOString().slice(0,10);
-    setQuem('Você');
+    setQuem('Anne');
     document.getElementById('btnExcluir').style.display = 'none';
   }
   document.getElementById('overlay').classList.add('open');
@@ -603,8 +606,8 @@ function fecharModal(){
 }
 function setQuem(q){
   quemSelecionado = q;
-  document.getElementById('btnVoce').classList.toggle('active', q==='Você');
-  document.getElementById('btnMarido').classList.toggle('active', q==='Marido');
+  document.getElementById('btnVoce').classList.toggle('active', q==='Anne');
+  document.getElementById('btnJessé').classList.toggle('active', q==='Jessé');
 }
 function onFoto(e){
   const file = e.target.files[0];
